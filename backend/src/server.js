@@ -18,7 +18,7 @@ process.on('SIGINT', () => {
     console.log('Process terminated')
   })
 })
-mongodb.initialization()
+// mongodb.initialization()
 app.use(cors())
 app.use(helmet())
 app.use(bodyParser.json())

@@ -7,15 +7,17 @@ const authentication = (req) => {
     return 'success'
 }
 
+const fakeDBUser = [{name : 'teera',username : 'admin',password : '123'}]
+
 const register = async ({ values: { name, username, password } }) => {
     let result
-    let user = await UserModel.findOne({ username })
+    let user =  await fakeDBUser.find( ele => ele.username === username)
     if (user) {
         result = { status: 400, message: 'User already exists' }
         return result
     }
 
-    let regisUser = await UserModel.create({ name, username, password })
+    let regisUser = fakeDBUser.push({ name, username, password })
     if (regisUser)
         result = { status: 200, message: 'Register Success' }
     return result
@@ -23,7 +25,7 @@ const register = async ({ values: { name, username, password } }) => {
 
 const login = async ({ values: { username, password } }) => {
     let result
-    let user = await UserModel.findOne({ username })
+    let user = await fakeDBUser.find( ele => ele.username === username)
     if(!user){
         result = { status: 404, message: 'not found user' }
         return result
